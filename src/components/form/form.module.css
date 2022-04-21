@@ -1,0 +1,30 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px 20px;
+  height: 150px;
+  width: 160px;
+  border: 1px solid rgba(109, 44, 32, 0.705);
+  border-radius: 5px;
+  box-shadow: 0px 0px 33px 8px rgba(197, 72, 72, 0.2);
+}
+.label_form {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.input_form {
+  height: 25px;
+  width: 150px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(109, 44, 32, 0.705);
+  border-radius: 3px;
+}
+
+.btn_form {
+  height: 25px;
+  width: 100px;
+  border: 1px solid rgba(109, 44, 32, 0.705);
+  border-radius: 3px;
+}
