@@ -1,10 +1,15 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';
-import s from './form.module.css'
+import s from './form.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { addContact } from "Redux/Slice";
+import { nanoid } from 'nanoid';
+import Notiflix from 'notiflix';
 
-export default function Form({ onSubmit }) {
+export default function Form() {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('+380');
+    const dispatch = useDispatch();
+    const contactList = useSelector((state) => state.contacts.items);
 
     const handleChange = e => {
         const { name, value } = e.currentTarget;
@@ -24,8 +29,15 @@ export default function Form({ onSubmit }) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        onSubmit({ name, number });
 
+        if (
+            contactList.find(contact => contact.name.toLowerCase() === name.toLowerCase()) ||
+            contactList.find(contact => contact.number === number)
+        ) {
+            return Notiflix.Notify.failure(`${name} is already in contacts`);
+        }
+
+        dispatch(addContact({ name, number, id: nanoid() }))
         resetState();
     };
 
@@ -33,6 +45,7 @@ export default function Form({ onSubmit }) {
         setName('');
         setNumber('+380');
     };
+
     return (
         <form onSubmit={handleSubmit}>
             <label className={s.label_form}>Name
@@ -64,9 +77,4 @@ export default function Form({ onSubmit }) {
             <button type="submit" className={s.btn_form}>add contacts</button>
         </form>
     )
-
 };
-
-Form.prototype = {
-    onSubmit: PropTypes.func.isRequired,
-}
