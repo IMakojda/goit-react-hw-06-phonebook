@@ -6,9 +6,10 @@
 }
 
 .find__input {
-  height: 25px;
+  height: 35px;
   width: 150px;
   border: 1px solid rgba(109, 44, 32, 0.705);
   border-radius: 5px;
   margin-top: 5px;
+  font-size: 22px;
 }
